@@ -1,17 +1,10 @@
-import org.apache.camel.CamelContext;
-import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
-import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.main.Main;
 import org.apache.camel.main.MainListenerSupport;
 import org.apache.camel.main.MainSupport;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import routes.FileRouteBuilder;
-import routes.HttpRouteBuilder;
+import routes.TimerRouteBuilder;
 
-import java.util.Date;
+import static java.lang.System.out;
 
 public class Application {
 
@@ -27,7 +20,7 @@ public class Application {
         main = new Main();
         main.addMainListener(new Events());
         main.addRouteBuilder(new FileRouteBuilder());
-        main.addRouteBuilder(new HttpRouteBuilder());
+        main.addRouteBuilder(new TimerRouteBuilder());
         main.run();
     }
 
@@ -36,12 +29,12 @@ public class Application {
 
         @Override
         public void afterStart(final MainSupport main) {
-            System.out.println("MainExample with Camel is now started!");
+            out.println("Camel app is now started!");
         }
 
         @Override
         public void beforeStop(final MainSupport main) {
-            System.out.println("MainExample with Camel is now being stopped!");
+            out.println("Camel app is shutting down!");
         }
     }
 }
