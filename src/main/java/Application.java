@@ -2,7 +2,6 @@ import no.sysco.common.CamelApplication;
 import org.apache.camel.main.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 import routes.FileRouteBuilder;
 import routes.TimerRouteBuilder;
 
@@ -29,8 +28,9 @@ public class Application {
 
 
     private static void boot(final CamelApplication application) throws Exception {
+
         final Main main = new Main();
-        MDC.put("Application", "CamelStarterExampleApplication");
+        main.getOrCreateCamelContext().setUseMDCLogging(Boolean.TRUE);
         main.addRouteBuilder(new FileRouteBuilder());
         main.addRouteBuilder(new TimerRouteBuilder());
         application.run(main);

@@ -16,5 +16,5 @@ repositories {
 
 dependencies {
   testCompile group: 'junit', name: 'junit', version: '4.12'
-  compile "no.sysco.common:camel-starter:0.1.5"
+  compile "no.sysco.common:camel-starter:0.1.27"
 }
