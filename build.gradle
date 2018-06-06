@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+  id 'java'
 }
 
 group 'apache-camel-starter'
@@ -8,22 +8,13 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+  jcenter()
+  maven {
+    url "http://localhost:8081/artifactory/gradle-release/"
+  }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'org.apache.camel', name: 'camel-core', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-stream', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-context', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-exec', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-flatpack', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-jetty', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-http', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-http4', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-rabbitmq', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-amqp', version: '2.18.0'
-    compile group: 'org.apache.camel', name: 'camel-elasticsearch', version: '2.18.0'
-
-
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+  compile "no.sysco.common:camel-starter:0.1.5"
 }

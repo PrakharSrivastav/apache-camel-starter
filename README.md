@@ -39,6 +39,10 @@ The exchange object consists of the message that is propagated through the route
 - OutIn
 - OutOptionalIn
 
+** Processors **
+** Expressions and predicates **
+
+
 ### Directory Structure
 - Application.java : Bootstrap application , add routes and lifecycle events. Services like tracing and logging drivers can be injected here
 - processors/ : Package to hold all message processors.

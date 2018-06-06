@@ -1,40 +1,38 @@
+import no.sysco.common.CamelApplication;
 import org.apache.camel.main.Main;
-import org.apache.camel.main.MainListenerSupport;
-import org.apache.camel.main.MainSupport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import routes.FileRouteBuilder;
 import routes.TimerRouteBuilder;
 
-import static java.lang.System.out;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Application {
 
-    private Main main;
+    static Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws Exception {
-        Application application = new Application();
-        application.boot();
+        CamelApplication application = new CamelApplication();
+
+        // Logging properties it using method on the api.
+        // Could be directly set as system properties from the command line
+        Map<String, String> loggerConfig = new HashMap<>();
+        //loggerConfig.put("timezone", "CET");
+        //loggerConfig.put("tcpDestination", "localhost:5001");
+        //loggerConfig.put("tcpKeepAlive", "2 minutes");
+
+        application.setLoggerProperties(loggerConfig);
+        boot(application);
     }
 
 
-    private void boot() throws Exception {
-        main = new Main();
-        main.addMainListener(new Events());
+    private static void boot(final CamelApplication application) throws Exception {
+        final Main main = new Main();
+        MDC.put("Application", "CamelStarterExampleApplication");
         main.addRouteBuilder(new FileRouteBuilder());
         main.addRouteBuilder(new TimerRouteBuilder());
-        main.run();
-    }
-
-
-    private static class Events extends MainListenerSupport {
-
-        @Override
-        public void afterStart(final MainSupport main) {
-            out.println("Camel app is now started!");
-        }
-
-        @Override
-        public void beforeStop(final MainSupport main) {
-            out.println("Camel app is shutting down!");
-        }
+        application.run(main);
     }
 }

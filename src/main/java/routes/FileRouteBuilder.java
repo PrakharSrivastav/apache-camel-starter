@@ -1,16 +1,26 @@
 package routes;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import processors.LogFileContentProcessor;
 
 public class FileRouteBuilder extends RouteBuilder {
+    Logger logger = LoggerFactory.getLogger(FileRouteBuilder.class);
+
+    static {
+        MDC.put("Route", "FileRouteBuilder");
+    }
 
     @Override
     public void configure() throws Exception {
+
         from(this.fileInputURI_1(), this.fileInputURI_2())
                 .log("Hello")
                 .process(new LogFileContentProcessor())
                 .to(this.fileOutputURI());
+        MDC.remove("Route");
     }
 
     private String fileInputURI_1() {
