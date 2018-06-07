@@ -8,6 +8,7 @@ public class TimerRouteBuilder extends RouteBuilder {
     public void configure() throws Exception {
         getContext().setUseMDCLogging(true);
         from("timer://simpleTimer?period=10000")
+                .routeId("timerRoute")
                 .setBody(simple("Hello from timer at ${header.firedTime}"))
                 .process(new LogContentProcessor())
                 .end();

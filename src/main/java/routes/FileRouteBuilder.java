@@ -4,6 +4,7 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import processors.LogContentProcessor;
 import processors.LogFileContentProcessor;
 
 public class FileRouteBuilder extends RouteBuilder {
@@ -11,16 +12,14 @@ public class FileRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
         getContext().setUseMDCLogging(Boolean.TRUE);
-
-
         from(this.fileInputURI_1(), this.fileInputURI_2())
-
+                .routeId("fileRouteBuider")
                 .log(LoggingLevel.INFO, LoggerFactory.getLogger(FileRouteBuilder.class), "marker", "Processing file ${file:name}")
-                .to("log:#logger?showAll=true&level=ERROR")
+//                .to("log:#logger?showAll=true&level=ERROR")
 //                .log("${exchangePropertie}")
                 .process(new LogFileContentProcessor())
+                .process(new LogContentProcessor())
                 .to(this.fileOutputURI());
     }
 
