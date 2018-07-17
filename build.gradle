@@ -1,16 +1,17 @@
-plugins {
-  id 'java'
-}
+apply plugin: "java"
 
 group 'apache-camel-starter'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+
+
+
 repositories {
   jcenter()
   maven {
-    url "http://localhost:8081/artifactory/gradle-release/"
+    url "http://factory.oslo.sysco.no:8081/artifactory/gradle-release/"
   }
 }
 
@@ -21,5 +22,5 @@ jar {
 
 dependencies {
   testCompile group: 'junit', name: 'junit', version: '4.12'
-  compile "no.sysco.common:camel-starter:0.1.33"
+  compile "no.sysco.common:camel-starter:0.1.8"
 }

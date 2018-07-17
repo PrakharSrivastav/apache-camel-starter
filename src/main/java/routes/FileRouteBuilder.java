@@ -15,9 +15,7 @@ public class FileRouteBuilder extends RouteBuilder {
         getContext().setUseMDCLogging(Boolean.TRUE);
         from(this.fileInputURI_1(), this.fileInputURI_2())
                 .routeId("fileRouteBuider")
-                .log(LoggingLevel.INFO, LoggerFactory.getLogger(FileRouteBuilder.class), "marker", "Processing file ${file:name}")
-//                .to("log:#logger?showAll=true&level=ERROR")
-//                .log("${exchangePropertie}")
+                .log(LoggingLevel.INFO, logger, "Processing file ${file:name}")
                 .process(new LogFileContentProcessor())
                 .process(new LogContentProcessor())
                 .to(this.fileOutputURI());

@@ -3,11 +3,15 @@ This app shows how to setup a simple camel application with routes and processor
 
 ## Basics
 
-- Routing rules : A routing rule directs a message from sourcet to target with intermediate processing. a typical syntax for the routing rule is as follows:
+- Routing rules : A routing rule directs a message from source to target with intermediate processing. a typical syntax for the routing rule is as follows:
 ```from("SourceURL").process().to("TergetURL")```
 
 **Consumers and Producers**
 A local route starts with a consumer (**from("SourceURL")**) and typically ends with producer (**to("TargetURL")**)
+- Producers: Camel abstractions that refers to an entity capable of sending message to an endpoint
+- Consumers: Receives message produced by external system, wrpas them in an exchange and sends them downstream for processing
+    - Event Driven Consumers: It is an async receiver that listens on a channel eg tcp/ip port, jms queue websocket etc. 
+    - Polling Consumers: sync receiver that actively goes and fetches messages from a particular source like ftp, 
 
 **Exchange message**
 The exchange object consists of the message that is propagated through the route. The main constituents of the exchange message are as follows:

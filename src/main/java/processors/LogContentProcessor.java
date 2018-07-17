@@ -11,7 +11,7 @@ public class LogContentProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        logger.info(String.format("The logger conetent is {}", "Yo"));
+        logger.info("The logger conetent is {}", "Yo");
 //        throw new IllegalArgumentException("Some error");
     }
 }
